@@ -1,5 +1,6 @@
 <template>
   <section class="sort-buttons">
+
     <span>Sort by:</span>
     <button
       class="sort"
@@ -22,6 +23,8 @@
     >
       Title
     </button>
+    
+    <input type="checkbox" class="favorite-checkbox" id="favorites" v-model="isFiltered" @change="filterFavorites"> <label for="favorites">Favorites Only</label>
   </section>
 </template>
 
@@ -29,12 +32,14 @@
 export default {
   name: "SortButtons",
   props: {
-    movies: Array
+    movies: Array,
+    filtered: Boolean
   },
   data() {
     return {
       isActive: "",
       ascending: false,
+      isFiltered: this.filtered,
       articles: ["a", "an", "the"]
     };
   },
@@ -60,6 +65,9 @@ export default {
 
       this.ascending = !this.ascending;
       this.isActive = sortby;
+    },
+    filterFavorites() {
+      this.$emit('filterFavorites');
     }
   }
 };
@@ -70,7 +78,8 @@ export default {
   text-align: right;
 }
 
-.sort {
+.sort,
+.filter {
   background-color: #fff;
   border: 1px solid #c5c5c5;
   border-radius: 0.5ch;
@@ -79,5 +88,9 @@ export default {
 
 .active {
   font-weight: bold;
+}
+
+.favorite-checkbox {
+  margin-left: 2ch;
 }
 </style>

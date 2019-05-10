@@ -3,10 +3,7 @@
     <h1>Movie List!</h1>
     <p>These were the top-rated films of the 20th Century.</p>
 
-    <SortButtons :movies="movieList()" />
-    <div>
-      <button @click="filterFavorites">Faves</button>
-    </div>
+    <SortButtons :movies="movieList()" :filtered="filtered" @filterFavorites="toggleFavorites" />
 
     <ul class="movie-list">
       <li v-for="movie in movieList()" :key="movie.id">
@@ -45,8 +42,8 @@ export default {
         return this.movies;
       }
     },
-    filterFavorites() {
-      this.filtered = !this.filtered
+    toggleFavorites() {
+      this.filtered = !this.filtered;
     }
   }
 };
