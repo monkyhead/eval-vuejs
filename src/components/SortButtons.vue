@@ -29,7 +29,7 @@
 export default {
   name: "SortButtons",
   props: {
-    movies: Object
+    movies: Array
   },
   data() {
     return {
@@ -48,7 +48,7 @@ export default {
       }
     },
     sortList(sortby) {
-      this.movies.results.sort((a, b) => {
+      this.movies.sort((a, b) => {
         let aCompare = a[sortby];
         let bCompare = b[sortby];
         if (sortby === "title") {
